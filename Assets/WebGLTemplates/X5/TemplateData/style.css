@@ -1,0 +1,131 @@
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.game-wrapper {
+    width: 100%;
+    background: #000000;
+    margin: 0;
+    min-height: 100%;
+}
+
+.game {
+    position: relative;
+    /* min-height: 100%; */
+}
+.webgl-content {
+    border: none;
+    bottom: 30%;
+    height: 100vh;
+    padding: 0;
+}
+
+#unityContainerCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+}
+
+#unityContainer {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: min(100vw, 100vh * (16 / 9));
+    aspect-ratio: 16/9;
+
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:transparent;
+
+}
+
+#unityContainerCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#ui-root {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 999999;
+    pointer-events: none;
+    overflow: visible;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui-scaled {
+    transform: scale(1);
+    transform-origin: center center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    overflow: visible;
+    position: relative;
+    z-index: 50;
+}
+.progress {
+    /* Размеры и позиционирование теперь задаются в JavaScript */
+    height: 81px;
+    overflow: visible;
+    z-index: 100;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    /* Убираем масштабирование, которое создавало проблемы */
+}
+
+.empty {
+    background: no-repeat center / contain url(../TemplateData/progress-bar-empty.png);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 24px 0px; /* Возвращаем вертикальные отступы */
+    display: flex;
+    align-items: center; /* вертикально центрируем наполнитель */
+    overflow: hidden; /* Скрываем переполнение */
+    z-index: 10;
+}
+
+.full {
+    background: no-repeat left center / auto 172% url(../TemplateData/progress-bar-full.png);
+    width: 0%;
+    height: 100%;
+    border-radius: 9999px;
+    min-width: 0;
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 20;
+    /*left: 3px;  Убеждаемся, что начинается от левого края */
+}

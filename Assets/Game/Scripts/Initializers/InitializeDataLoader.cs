@@ -1,19 +1,24 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Systems.Loading;
+using Game.Scripts.Systems.Network;
+using Game.Scripts.Systems.PlayerController;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Game.Scripts.Initializers
+namespace Game.Scripts.Systems.Initialize
 {
 	public class InitializeDataLoader : IInitializable
 	{
+		[Inject] private IPlayerData _playerData;
+		[Inject] private SceneContainer _sceneContainer;
+		[Inject] private NetworkSystem _networkSystem;
 		[Inject] private ProjectDataLoader _projectDataLoader;
-		//[Inject] private NetworkSystem _networkSystem;
-
 		private float _lastProgress = 0.6f;
+
 
 		public void Initialize()
 		{
@@ -24,7 +29,7 @@ namespace Game.Scripts.Initializers
 		{
 			UpdateJSLoaderProgress(_lastProgress);
 
-			//await _networkSystem.StartLoadUser();
+			await _networkSystem.StartLoadUser();
 
 			await foreach (var progress in _projectDataLoader.UpdateLoadingData())
 			{
@@ -34,11 +39,12 @@ namespace Game.Scripts.Initializers
 			LoadingComplete();
 		}
 
+
 		private async void LoadingComplete()
 		{
 			UpdateJSLoaderProgress(0.91f);
 
-			var temp = await Addressables.LoadSceneAsync("start", LoadSceneMode.Additive).ToUniTask();
+			await Addressables.LoadSceneAsync("start", LoadSceneMode.Additive).ToUniTask();
 			UpdateJSLoaderProgress(0.92f);
 			await SceneManager.UnloadSceneAsync("Scenes/initial");
 			UpdateJSLoaderProgress(0.93f);
@@ -47,8 +53,7 @@ namespace Game.Scripts.Initializers
 			GC.Collect();
 			UpdateJSLoaderProgress(0.98f);
 			await UniTask.WaitUntil(() => StartDataLoader.Instance);
-			
-			//await StartDataLoader.Instance.LoadingComplete(); //TODO
+			await StartDataLoader.Instance.LoadingComplete();
 
 
 			await UniTask.Delay(1000);

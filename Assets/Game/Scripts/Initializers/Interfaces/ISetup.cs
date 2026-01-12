@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Game.Scripts.Initializers.Interfaces
+namespace Game.Scripts.Systems.Initialize.Interfaces
 {
 	public interface ISetup
 	{

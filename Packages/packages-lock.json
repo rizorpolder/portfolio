@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "73a63b7f672b88f7e9992f6917eb458a8cbb6fa9"
     },
+    "com.rizorpolder.audiomanager": {
+      "version": "https://github.com/rizorpolder/packages.git?path=/Assets/Plugins/AudioManager",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e12023f54ef01e75f9b85fc0b1dcfa4751d3acab"
+    },
     "com.unity.addressables": {
       "version": "2.7.6",
       "depth": 0,
@@ -113,6 +120,13 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
       "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

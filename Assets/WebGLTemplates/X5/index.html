@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Office Quest</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="TemplateData/FullScreen.js"></script>
+    <script src="TemplateData/config.js"></script>
+</head>
+
+<body>
+<main class="game-wrapper">
+    <div class="game">
+        <div class="webgl-content">
+            <div id="unityContainer">
+                <canvas id="unityContainerCanvas"></canvas>
+            </div>
+        </div>
+        <script>createLoadingUI()</script>
+    </div>
+    <script>
+        function halfUnityProgress(value) {
+            var progress = value / 2;
+            updateLoadingProgress(progress);
+        }
+
+        document.addEventListener("contextmenu", event => event.preventDefault());
+
+        if (document.addEventListener) {
+            console.log('Running at ' + navigator.userAgent);
+            document.addEventListener('fullscreenchange', exitHandler, false);
+            document.addEventListener('mozfullscreenchange', exitHandler, false);
+            document.addEventListener('MSFullscreenChange', exitHandler, false);
+            document.addEventListener('webkitfullscreenchange', exitHandler, false);
+            document.addEventListener('visibilityChange', htmlVisibilityChange, false);
+        }
+
+        function exitHandler() {
+            console.log('Фулскрин выход.');
+            if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+                console.log('Фулскрин выход2.');
+                myGameInstance.SendMessage("FullScreenButton", "OnFullScreenDisabled");
+            }
+        }
+
+        function htmlVisibilityChange() {
+            console.log('Свернули приложение');
+            if (document.hidden) {
+                console.log('Hidden');
+            } else {
+                console.log('Showed');
+            }
+        }
+
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            // Mobile device style: fill the whole browser client area with the game canvas:
+
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+
+            var containerMobile = document.querySelector("#unityContainer");
+            var containerCanvasMobile = document.querySelector("#unityContainerCanvas");
+            containerMobile.className = "unity-mobile";
+            containerMobile.style.width = "100%";
+            containerMobile.style.height = "100%";
+            containerCanvasMobile.className = "unity-mobile";
+
+
+        } else {
+            // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+        }
+
+        var myGameInstance;
+        let buildScript = document.createElement('script');
+        buildScript.src = loaderUrl;
+        buildScript.onload = () => {
+            var canvas = document.querySelector("#unityContainerCanvas");
+            createUnityInstance(canvas, config, halfUnityProgress).then(unityInstance => {
+                myGameInstance = unityInstance;
+            }).catch((message) => {
+                alert(message);
+            });
+
+        }
+        document.body.append(buildScript);
+    </script>
+</main>
+</body>
+</html>
