@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98dc6a7385584d7ea1e71839d72e5940, type: 3}
+  m_Name: SettingsManagerAudio
+  m_EditorClassIdentifier: com.rizorpolder.audiomanager::AudioManager.Runtime.Core.ManagerAudioConfig.ManagerAudioConfig
+  MusicVolumeKey: MusicVolume
+  SoundVolumeKey: SoundsVolume
+  soundsPath: 
+  saveDataPath: 
+  tAudioPath: Game/Scripts/External/ManagerAudio
+  audioFilesJson: {fileID: 0}
+  audioMixerDefaultGroup: {fileID: -4894391289682263965, guid: 5fc97fd1754c0264e94e3e667fcaf537, type: 2}
+  audioMixer: {fileID: 24100000, guid: 5fc97fd1754c0264e94e3e667fcaf537, type: 2}
+  isEnableMusicOnStart: 1
+  isEnabledDynamicListener: 0
+  metaMusic: []
+  coreMusic: []
+  ambientSounds: []
+  soundsAssets: []
+  emotionsSounds: []
+  <CanPlayUnfocused>k__BackingField: 1
